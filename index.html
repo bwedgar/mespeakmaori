@@ -19,66 +19,65 @@
 <body>
 
   <script>
-//  meSpeak.loadVoice('/voices/en/en-us.json');
+    //  meSpeak.loadVoice('/voices/en/en-us.json');
 
-meSpeak.loadVoice('en/en-us');
+    meSpeak.loadVoice('en/en-us');
 
-      //MODEL
+    //MODEL
 
-      syllable = "pa"
-      voices = []
-      const lang = "en-UK"//'it-IT'
-      const voiceIndex = 2
-
-
+    syllable = "pa"
+    voices = []
+    const lang = "en-UK" //'it-IT'
+    const voiceIndex = 2
 
 
-      //VIEW
 
-      addElement = (id, container, width, style, text) => {
-        element = document.createElement("div")
-        element.style.cssText = style
-        element.style.width = width + "%"
-        element.id = id
-        element.innerHTML = text
-        container.appendChild(element)
-        return element
+
+    //VIEW
+
+    addElement = (id, container, width, style, text) => {
+      element = document.createElement("div")
+      element.style.cssText = style
+      element.style.width = width + "%"
+      element.id = id
+      element.innerHTML = text
+      container.appendChild(element)
+      return element
+    }
+    style = "color:white;background:black;border-style:solid;border-width:1px;font-size:2vw;font-family:verdana;"
+    buttonStyle = style + "position:relative;height:5vw;text-align:center;"
+    buttonLeftStyle = buttonStyle + "position:relative;float:left;text-align:center;"
+    buttonRightStyle = buttonStyle + "position:relative;right:0;text-align:center;"
+    listStyle = buttonStyle + "position:relative;right:0;text-align:left;"
+    divStyle = style + "position:relative;text-align:left;display:block;"
+    correctButtonStyle = buttonStyle + "color:limeGreen;"
+    hiddenButtonStyle = buttonStyle + "color:black;font-size:2vw;"
+    revealedButtonStyle = buttonStyle + "width:25%;font-size:2vw;"
+
+
+
+    display = () => {
+      body = document.body
+      body.style.cssText = "background:black;"
+      body.innerHTML = ""
+      body.addEventListener("click", clicked)
+      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak")
+
+    }
+
+
+
+    //CONTROLLER
+
+    clicked = e => {
+      id = e.target.id
+      element = e.target
+
+      if (id == "pairingButton") {
+        meSpeak.speak('hello world');
       }
-      style = "color:white;background:black;border-style:solid;border-width:1px;font-size:2vw;font-family:verdana;"
-      buttonStyle = style + "position:relative;height:5vw;text-align:center;"
-      buttonLeftStyle = buttonStyle + "position:relative;float:left;text-align:center;"
-      buttonRightStyle = buttonStyle + "position:relative;right:0;text-align:center;"
-      listStyle = buttonStyle + "position:relative;right:0;text-align:left;"
-      divStyle = style + "position:relative;text-align:left;display:block;"
-      correctButtonStyle = buttonStyle + "color:limeGreen;"
-      hiddenButtonStyle = buttonStyle + "color:black;font-size:2vw;"
-      revealedButtonStyle = buttonStyle + "width:25%;font-size:2vw;"
-
-
-
-      display = () => {
-        body = document.body
-        body.style.cssText = "background:black;"
-        body.innerHTML = ""
-        body.addEventListener("click", clicked)
-        pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak")
-
-      }
-
-
-
-      //CONTROLLER
-
-      clicked = e => {
-        id = e.target.id
-        element = e.target
-
-        if (id == "pairingButton") {
-          meSpeak.speak('hello world');
-
-        }
-      }
-
+    }
+    display()
   </script>
 </body>
 
