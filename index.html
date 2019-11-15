@@ -11,6 +11,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+  <script type="text/javascript" src="mespeak.js?v=2.0.4"></script>
 
 
 </head>
@@ -18,14 +19,9 @@
 <body>
 
   <script>
-    addEventListener('load', function(e) {
+  meSpeak.loadVoice('voices/en/en-us.json');
 
-      makeObject = (array, names) => {
-        o = {}
-        names.map((v, i) => o[v] = array[i])
-        return o
-      }
-
+meSpeak.loadVoice('en/en-us');
 
       //MODEL
 
@@ -34,38 +30,7 @@
       const lang = "en-UK"//'it-IT'
       const voiceIndex = 2
 
-      const speak = async text => {
-        if (!speechSynthesis) {
-          return
-        }
-        const message = new SpeechSynthesisUtterance(text)
-        message.voice = await chooseVoice()
-        speechSynthesis.speak(message)
-      }
 
-      const getVoices = () => {
-        return new Promise(resolve => {
-          let voices = speechSynthesis.getVoices()
-          if (voices.length) {
-            resolve(voices)
-            return
-          }
-          speechSynthesis.onvoiceschanged = () => {
-            voices = speechSynthesis.getVoices()
-            voices.forEach(voice =>
-    console.log(voice.name, voice.lang))
-            resolve(voices)
-          }
-        })
-      }
-
-      const chooseVoice = async () => {
-        const voices = (await getVoices()).filter(voice => voice.lang == lang)
-
-        return new Promise(resolve => {
-          resolve(voices[voiceIndex])
-        })
-      }
 
 
       //VIEW
@@ -109,13 +74,11 @@
         element = e.target
 
         if (id == "pairingButton") {
-          speak("pa pair pe pourpu")
+          meSpeak.speak('hello world');
+
         }
       }
 
-
-      display();
-    })
   </script>
 </body>
 
