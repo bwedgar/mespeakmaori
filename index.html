@@ -56,7 +56,7 @@
       body.style.cssText = "background:black;"
       body.innerHTML = ""
       body.addEventListener("click", clicked)
-      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 10")
+      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 11")
 
     }
 
@@ -69,7 +69,7 @@
       element = e.target
 
       if (id == "pairingButton") {
-        meSpeak.speak('[[paa pi pE poU pU pA: pi: pE: pO: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
+        meSpeak.speak('[[pa# pi pE pO pU pA: pi: pE: pO: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
               //  meSpeak.speak('[[pA: pi: pi@ pO: pu:]]' , {speed:100,variant:"f3"});
       }
     }
