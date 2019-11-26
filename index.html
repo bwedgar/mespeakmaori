@@ -25,8 +25,8 @@
     //MODEL
 
 
-    written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "b", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " "]
-    sound = ["a#", "E", "i", "o@", "U", "A:", "E:", "i:", "o@", "u:", "b", "h", "k", "m", "n", "p", "r", "t", "f", "N", "w", " "]
+    written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "b", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ","'"]
+    sound = ["a#", "E", "i", "o@", "U", "A:", "E:", "i:", "o@", "u:", "b", "h", "k", "m", "n", "p", "r", "t", "f", "N", "w", " ","'"]
     say = (text) => {
       text = text.replace('wh', 'f').replace('ng', 'g')
       phonemes = ""
@@ -34,7 +34,7 @@
       //alert(text)
       alert(phonemes)
     }
-    say("kia ora whanau")
+    say("'kia 'ora 'whanau")
 
 
     //VIEW
