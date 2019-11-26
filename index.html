@@ -11,7 +11,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <script type="text/javascript" src="mespeak.js?v=2.0.4"></script>
+  <!-- <script type="text/javascript" src="mespeak.js?v=2.0.4"></script> -->
 
 
 
@@ -20,12 +20,21 @@
 <body>
 
   <script>
-  meSpeak.loadVoice('en/en-us');
+  // meSpeak.loadVoice('en/en-us');
 
     //MODEL
 
 
-
+    written=["a","e","i","o","u","ā","ē","ī","ō","ū","b","h","k","m","n","p","r","t","f","g","w"," "]
+    sound=["a#","E","i","o@","U","A:","E:","i:","o@","u:","b","h","k","m","n","p","r","t","f","N","w"," "]
+say=(text)=>{
+text=text.replace('wh','f').replace('ng','g')
+phonemes=""
+text.split("").forEach((c)=>phonemes+=sound[written.indexOf(c)])
+//alert(text)
+console.log(phonemes)
+}
+//say("kia ora")
 
 
     //VIEW
@@ -56,7 +65,7 @@
       body.style.cssText = "background:black;"
       body.innerHTML = ""
       body.addEventListener("click", clicked)
-      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 13")
+      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 14")
 
     }
 
@@ -67,13 +76,11 @@
     clicked = e => {
       id = e.target.id
       element = e.target
-      written=["a","e","i","o","u","ā","ē","ī","ō","ū","b","h","k","m","n","p","r","t","wh","ng","w"]
-      sound=["a","e","i","o","u","ā","ē","ī","ō","ū","b","h","k","m","n","p","r","t","wh","ng","w"]
-
 
       if (id == "pairingButton") {
-        meSpeak.speak('[[pa# pi pE po@ pU pA: pi: pE: po@: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
-              //  meSpeak.speak('[[pA: pi: pi@ pO: pu:]]' , {speed:100,variant:"f3"});
+        // meSpeak.speak('[[pa# pi pE po@ pU pA: pi: pE: po@: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
+        meSpeak.speak(phonemes, {speed:80,wordgap:15,variant:"f2"});
+
       }
     }
     display()
