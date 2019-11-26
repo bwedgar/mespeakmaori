@@ -32,7 +32,7 @@
       phonemes = ""
       text.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
       //alert(text)
-      console.log(phonemes)
+      alert(phonemes)
     }
     say("kia ora")
 
@@ -65,7 +65,7 @@
       body.style.cssText = "background:black;"
       body.innerHTML = ""
       body.addEventListener("click", clicked)
-      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 14")
+      pairingButton = addElement("pairingButton", body, 16, buttonStyle, "mespeak 15")
 
     }
 
@@ -79,7 +79,7 @@
 
       if (id == "pairingButton") {
         // meSpeak.speak('[[pa# pi pE po@ pU pA: pi: pE: po@: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
-        meSpeak.speak(phonemes, {
+        meSpeak.speak("[["+phonemes+"]]", {
           speed: 80,
           wordgap: 15,
           variant: "f2"
