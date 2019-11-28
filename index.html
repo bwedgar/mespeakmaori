@@ -27,10 +27,10 @@
     //MODEL
 
 
-    written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "b", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ","'","1"]
-    sound = ["a", "E", "i", "o@", "U", "A:", "E:", "i:", "o@", "u:", "b", "h", "k", "m", "n", "p", "r", "t", "f", "N", "w", " ","'","eI"]
+    written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "b", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " " , "'" , "\," ,"_","1","2","3","4","5"]
+    sound = ['a#', 'E', 'i', 'o', 'U', 'A:', 'i@', 'i:', 'O:', 'u:', 'b', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ' , '\'', '\,','_','we','aI','aI','Ei','Ea#']
     say = (text) => {
-      text = text.replace('wh', 'f').replace('ng', 'g').replace('oe',"1")
+      text = text.replace('wh', 'f').replace('ng', 'g').replace('oe',"1").replace('ae',"2").replace('ai',"3").replace('ei',"4").replace('ea',"5")
       phonemes = ""
       text.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
       return phonemes
@@ -49,7 +49,7 @@
       container.appendChild(element)
       return element
     }
-    style = "color:white;background:black;border-style:solid;border-width:1px;font-size:2vw;font-family:verdana;"
+    style = "color:white;background:black;border-style:solid;border-width:1px;font-size:5vw;font-family:verdana;"
     buttonStyle = style + "position:relative;height:5vw;text-align:center;"
     buttonLeftStyle = buttonStyle + "position:relative;float:left;text-align:center;"
     buttonRightStyle = buttonStyle + "position:relative;right:0;text-align:center;"
@@ -57,7 +57,7 @@
     divStyle = style + "position:relative;text-align:left;display:block;"
     correctButtonStyle = buttonStyle + "color:limeGreen;"
     hiddenButtonStyle = buttonStyle + "color:black;font-size:2vw;"
-    revealedButtonStyle = buttonStyle + "width:25%;font-size:2vw;"
+    revealedButtonStyle = buttonStyle + "width:25%;font-size:5vw;"
 
 
 
@@ -66,8 +66,19 @@
       body.style.cssText = "background:black;"
       body.innerHTML = ""
       body.addEventListener("click", clicked)
-      t="'kia 'ora pai koe ngā 'whānau"
-      pairingButton = addElement("pairingButton", body, 16, buttonStyle, t)
+    //  t="'kia 'ora pai koe ngā 'whānau"
+  //  t="pa pā pe pē pi pī po pō pu pū pai pau poe pou poi pei"
+    t="kaka kākā keke kēkē ko"
+    t="kiki kīkī koko kōkō ko"
+    t="kae kei kai"
+    t='whangarei kaitaia mangonui ohope tauranga ruapehu taupo'
+    //t="nō hea koe"
+    //t="kei te pehea 'koe"
+    //t="'haere mai__ 'nga tama'riki"
+    //" ki kī ko kō ku kū kai kau koe kou koi kei ka "
+    //t="kae kai pa ko"
+
+      pairingButton = addElement("pairingButton", body, 100, buttonStyle, t)
 
     }
 
@@ -81,10 +92,11 @@
 
       if (id == "pairingButton") {
         // meSpeak.speak('[[pa# pi pE po@ pU pA: pi: pE: po@: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
+        //alert(say(t))
         meSpeak.speak("[["+  say(t)+"]]", {
           speed: 120,
-          wordgap: 15,
-          variant: "f2"
+          wordgap: 10,
+          variant: "f5"//best f5
         });
 
       }
