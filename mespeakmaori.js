@@ -29,7 +29,7 @@ say = (text) => {
   words.forEach(w => {
     winnerIndex = 0
     winnerLevel = 0
-    syllables = (w.match(/([fghkmnprtw]*[aeiouāēīōū123456789]+)/g))
+    syllables = (w.match(/([fghkmnprtw]*[aeiouāēīōū123456789]+?)/g))
     morae = []
     accMorae = []
     acc = 0
@@ -65,63 +65,20 @@ say = (text) => {
 
 
   pairingButton.innerHTML = sentence
-  //if the word contains a long vowel put the stress mark before this syllable
-  //if the word contains a dipthong put a stress mark befor the last dipthong
-  //put the stress mark at the start of the word
 
   phonemes = ""
-  text.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
-  phonemes += " po"
-  //for each word
+  textStressed.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
+  //phonemes += " po"
 
-  //if the word contains a long vowel put the stress mark before this syllable
-  //if the word contains a dipthong put a stress mark befor the last dipthong
-  //put the stress mark at the start of the word
   //alert(phonemes)
   return phonemes
 }
 
 
-// words = ["tek1", "mārama", "tamariki", "tam2ti"]
-// syllables = []
-// words.forEach(w => {
-//   syllables = (w.match(/([fghkmnprtw][aeiouāēīōū12345]+)/g))
-//   console.log(syllables)
-//   morae = []
-//   accMorae = []
-//   acc = 0
-//   syllables.forEach((s, i) => {
-//     morae[i] = (s.search(/[aeiou]/) > -1) ? 1 : 0 + (s.search(/[āēīōū]|[1-9]/) > -1) ? 2 : 0
-//     acc += morae[i]
-//     accMorae[i] = acc
-//   })
-//   console.log(accMorae.reverse())
-//   //})
-//   syllables.forEach((s, i) => {
-//     if (accMorae[i] <= 4) {
-//       sIndex = i //accent on this syllable if nothing else
-//       if (s.search(/[āēīōū]/) > -1) {
-//         sIndex = i
-//       } else {
-//         if (s.search(/[1-9]/) > -1) {
-//           sIndex = i
-//         }
-//       }
-//     }
-//   })
-//   console.log(w + "  " + sIndex);
-// })
-
-// words = ["kapāmara", "kapamāra", "kapamārā", "kapam2rā", "kapam3ra", "kāpamara"]
-
-
-
-
-
 mespeakmaori = (t) => {
   meSpeak.speak("[[" + say(t) + "]]", {
-    speed: 100,
-    wordgap: 10,
+    speed: 150,
+    wordgap: 6,
     //nostop: false,
     variant: "m8" //"f5" //best f5
   });
