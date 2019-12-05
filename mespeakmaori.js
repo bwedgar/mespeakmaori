@@ -70,7 +70,7 @@ say = (text) => {
 }
 
 
-mespeakmaori = (t) => {
+export mespeakmaori = (t) => {
   meSpeak.speak("[[" + say(t) + "]]", {
     speed: 150,
     wordgap: 8,
