@@ -2,18 +2,18 @@ meSpeak.loadVoice('en/en-us');
 
 written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8"]
 sound = ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU', 'O:A:']
-long = (s) => {
-  return s.match(/[āēīōū]/)
+long = (syl) => {
+  return syl.match(/[āēīōū]/)
 }
-dipthong = (s) => {
-  return s.match(/[123456789]/)
+dipthong = (syl) => {
+  return syl.match(/[123456789]/)
 }
 
-level = (s) => {
-  if (long(s)) {
+level = (syl) => {
+  if (long(syl)) {
     return 3
   }
-  if (dipthong(s)) {
+  if (dipthong(syl)) {
     return 2
   }
   return 1
@@ -33,30 +33,28 @@ say = (text) => {
     morae = []
     accMorae = []
     acc = 0
-    syllables.forEach((s, i) => {
-      //console.log(s)
-      morae[i] = (s.search(/[aeiou]/) > -1) ? 1 : 0 + (s.search(/[āēīōū]|[1-9]/) > -1) ? 2 : 0
+    syllables.forEach((syl, i) => {
+      //console.log(syl)
+      morae[i] = (s.search(/[aeiou]/) > -1) ? 1 : 0 + (syl.search(/[āēīōū]|[1-9]/) > -1) ? 2 : 0
       acc += morae[i]
       accMorae[i] = acc
     })
-    //console.log(accMorae.reverse())
-    syllables.forEach((s, i) => {
+
+    syllables.forEach((syl, i) => {
       if (accMorae[i] <= 4) {
-        //console.log(s+" "+level(s))
-        if (level(s) > winnerLevel) {
-          winnerLevel = level(s)
+        if (level(syl) > winnerLevel) {
+          winnerLevel = level(syl)
           winnerIndex = i
         }
       }
     })
-    syllables.forEach((s, i) => {
+    syllables.forEach((syl, i) => {
       if (i == winnerIndex) {
-        textStressed = textStressed + "'" + s
+        textStressed = textStressed + "'" + syl
       } else {
-        textStressed = textStressed + s
+        textStressed = textStressed + syl
       }
     })
-    //console.log(w + " " + syllables[winnerIndex])
     textStressed += " "
 
   })
@@ -68,9 +66,6 @@ say = (text) => {
 
   phonemes = ""
   textStressed.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
-  //phonemes += " po"
-
-  //alert(phonemes)
   return phonemes
 }
 
@@ -78,7 +73,7 @@ say = (text) => {
 mespeakmaori = (t) => {
   meSpeak.speak("[[" + say(t) + "]]", {
     speed: 150,
-    wordgap: 6,
+    wordgap: 8,
     //nostop: false,
     variant: "m8" //"f5" //best f5
   });
