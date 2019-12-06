@@ -1,7 +1,7 @@
 meSpeak.loadVoice('en/en-us');
 mespeakmaori = {
-  written: ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8"],
-  sound: ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU', 'O:A:'],
+  written: ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  sound: ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU', 'O:A:', 'iu'],
   long: (syl) => {
     return syl.match(/[āēīōū]/)
   },
@@ -20,8 +20,8 @@ mespeakmaori = {
   },
 
   say: function(text) {
-    text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/oa/g, "8")
-    words = text.split(" ")
+    text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/oa/g, "8").replace(/iu/g, "9"),
+      words = text.split(" ")
     textStressed = ""
     sentence = ""
     words.forEach(w => {
@@ -53,10 +53,13 @@ mespeakmaori = {
           textStressed = textStressed + syl
         }
       })
+      textStressed += " "
+
     })
-    textStressed += " "
     phonemes = ""
+
     textStressed.split("").forEach((c) => phonemes += this.sound[this.written.indexOf(c)])
+    console.log(textStressed)
     return phonemes
   },
 
