@@ -1,7 +1,48 @@
 meSpeak.loadVoice('en/en-us');
+sound= function(text, code, sound1){
+  return {
+    text,
+    code,
+    sound1
+  }
+}
+
 mespeakmaori = {
-  written: ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7",  "9"],
-  sound: ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU',  'iu'],
+
+  sounds: [this.sound('a', 'a', 'A:'),
+    this.sound('e', 'e', 'E'),
+    this.sound('i', 'i', 'i'),
+    this.sound('o', 'o', 'o@'),
+    this.sound('u', 'u', 'u'),
+    this.sound('ā', 'ā', 'A:'),
+    this.sound('ē', 'ē', 'E:'),
+    this.sound('ī', 'ī', 'i:'),
+    this.sound('ō', 'ō', 'O:'),
+    this.sound('ū', 'ū', 'u:'),
+    this.sound('h', 'h', 'h'),
+    this.sound('k', 'k', 'k'),
+    this.sound('m', 'm', 'm'),
+    this.sound('n', 'n', 'n'),
+    this.sound('p', 'p', 'p'),
+    this.sound('r', 'r', 'r'),
+    this.sound('t', 't', 't'),
+    this.sound('ng', 'g', 'N'),
+    this.sound('wf', 'f', 'w'),
+    this.sound(' ', ' ', ' '),
+    this.sound('\,', '\,', '\,'),
+    this.sound('\_ ', '\_', '\_'),
+    this.sound('-', '-', '-'),
+    this.sound('oe', '1', 'we'),
+    this.sound('ae', '2', 'aI'),
+    this.sound('ai', '3', 'aI'),
+    this.sound('ei', '4', 'eI'),
+    this.sound('ea', '5', 'Ea#'),
+    this.sound('oi', '6', 'OI'),
+    this.sound('ei', '4', 'oU'),
+    this.sound('ei', '4', 'O:A:'),
+    this.sound('ei', '4', 'iu')
+  ],
+
   long: (syl) => {
     return syl.match(/[āēīōū]/)
   },
@@ -20,7 +61,8 @@ mespeakmaori = {
   },
 
   say: function(text) {
-    text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/iu/g, "9"),
+    //text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/oa/g, "8").replace(/iu/g, "9"),
+console.log(this.sounds[3].sound1)
       words = text.split(" ")
     textStressed = ""
     sentence = ""
@@ -66,8 +108,8 @@ mespeakmaori = {
 
   speak: function(t) {
     meSpeak.speak("[[" + this.say(t) + "]]", {
-      speed: 130,
-      wordgap: 11,
+      speed: 150,
+      wordgap: 8,
       //nostop: false,
       variant: "m8" //"f5" //best f5
     });
