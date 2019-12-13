@@ -1,7 +1,7 @@
 meSpeak.loadVoice('en/en-us');
 mespeakmaori = {
-  written: ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7",  "9"],
-  sound: ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU',  'iu'],
+  written: ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " ", "'", "\,", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  sound: ['A:', 'E', 'i', 'o@', 'u', 'A:', 'E:', 'i:', 'O:', 'u:', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ', '\'', '\,', '_', '-', 'we', 'aI', 'aI', 'Ei', 'Ea#', 'OI', 'oU', 'o' ,'iu'],
   long: (syl) => {
     return syl.match(/[āēīōū]/)
   },
@@ -20,7 +20,7 @@ mespeakmaori = {
   },
 
   say: function(text) {
-    text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/iu/g, "9"),
+    text = text.replace(/wh/g, 'f').replace(/ng/g, 'g').replace(/oe/g, "1").replace(/ae/g, "2").replace(/ai/g, "3").replace(/ei/g, "4").replace(/ea/g, "5").replace(/oi/g, "6").replace(/au/g, "7").replace(/ou/g, "8").replace(/iu/g, "9"),
       words = text.split(" ")
     textStressed = ""
     sentence = ""
@@ -31,6 +31,7 @@ mespeakmaori = {
       morae = []
       accMorae = []
       acc = 0
+      //IF THE WORD STARTS WITH WHAKA- IGNORE THIS SUFFIX IN CALCULATING STRESSES
       syllables.forEach((syl, i) => {
         //console.log(syl)
         morae[i] = (syl.search(/[aeiou]/) > -1) ? 1 : 0 + (syl.search(/[āēīōū]|[1-9]/) > -1) ? 2 : 0
