@@ -23,27 +23,6 @@
 
 
   <script>
-
-
-
-
-    //MODEL
-
-    // meSpeak.loadVoice('en/en-us');
-    //
-    // written = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "b", "h", "k", "m", "n", "p", "r", "t", "f", "g", "w", " " , "'" , "\," ,"_","1","2","3","4","5"]
-    // sound = ['a#', 'E', 'i', 'o', 'U', 'A:', 'i@', 'i:', 'O:', 'u:', 'b', 'h', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'N', 'w', ' ' , '\'', '\,','_','we','aI','aI','Ei','Ea#']
-    // say = (text) => {
-    //   text = text.replace('wh', 'f').replace('ng', 'g').replace('oe',"1").replace('ae',"2").replace('ai',"3").replace('ei',"4").replace('ea',"5")
-    //   phonemes = ""
-    //   text.split("").forEach((c) => phonemes += sound[written.indexOf(c)])
-    //   return phonemes
-    // }
-
-
-
-    //VIEW
-
     addElement = (id, container, width, style, text) => {
       element = document.createElement("div")
       element.style.cssText = style
@@ -53,63 +32,42 @@
       container.appendChild(element)
       return element
     }
-    style = "color:white;background:black;border-style:solid;border-width:1px;font-size:5vw;font-family:verdana;"
-    buttonStyle = style + "position:relative;height:5vw;text-align:center;"
-    buttonLeftStyle = buttonStyle + "position:relative;float:left;text-align:center;"
-    buttonRightStyle = buttonStyle + "position:relative;right:0;text-align:center;"
-    listStyle = buttonStyle + "position:relative;right:0;text-align:left;"
-    divStyle = style + "position:relative;text-align:left;display:block;"
-    correctButtonStyle = buttonStyle + "color:limeGreen;"
-    hiddenButtonStyle = buttonStyle + "color:black;font-size:2vw;"
-    revealedButtonStyle = buttonStyle + "width:25%;font-size:5vw;"
 
+    style = "color:white;background:black;font-size:2vw;font-family:verdana;"
+    buttonStyle = style + "border-style:solid;border-width:1px;"
+    listStyle = buttonStyle + "text-align:left;"
 
+    document.body.style.cssText = style
 
-    display = () => {
-      body = document.body
-      body.style.cssText = "background:black;"
-      body.innerHTML = ""
-      body.addEventListener("click", clicked)
-    //  t="'kia 'ora pai koe ngā 'whānau"
-    t="pa pā pe pē pi pī po pō pu pū pai pau poe pou poi pei"
-  //  t="kaka kākā keke kēkē ko"
-  //  t="kiki kīkī koko kōkō ko"
-  //  t="kae kei kai"
-t='whangarei kaitaia mangonui ohope tauranga ruapehu taupo'
-//t="merē mēre ta ta"
-    //t="nō hea koe"
-    //t="kei te pehea 'koe"
-    //t="'haere mai__ 'nga tama'riki"
-    //" ki kī ko kō ku kū kai kau koe kou koi kei ka "
-    //t="kae kai pa ko"
-    //t="tekau taihi ruā tōru whā rima ona whitu waru iwa tekau"
-    t="kei te runga i te wānaga o aotearoa ki te tamāki makaurau"
-
-      pairingButton = addElement("pairingButton", body, 100, buttonStyle, t)
-
+    addElement = (id, type, width, style, text) => {
+      element = document.createElement(type)
+      element.style.cssText = style
+      element.style.width = width + "%"
+      element.id = id
+      element.innerHTML = text
+      document.body.appendChild(element)
+      return element
     }
 
-
-
-    //CONTROLLER
-
-    clicked = e => {
-      id = e.target.id
-      element = e.target
-
-      if (id == "pairingButton") {
-        // meSpeak.speak('[[pa# pi pE po@ pU pA: pi: pE: po@: pu:]]' , {speed:80,wordgap:15,variant:"f2"});
-        //alert(say(t))
-        // meSpeak.speak("[["+  say(t)+"]]", {
-        //   speed: 120,
-        //   wordgap: 10,
-        //   variant: "f5"//best f5
-        // });
-        mespeakmaori.speak(t)
-
-      }
+    addButton = (id, width, style, text, action) => {
+      addElement(id, "button", width, style, text)
+        .addEventListener("click", action)
     }
-    display()
+
+    sentences = [
+      "papā pepē pipī popō pupū",
+      "pāpa pēpe pīpi pōpo pūpu",
+      "pai pau poe pae pou poi pei",
+      "kai kau koe kae kou koi kei",
+      "kiki kīkī koko kōkō kiki kīkī koko kōkō ",
+      "whangarei kaitaia mangonui ohope tauranga ruapehu taupo",
+      "ki kī ko kō ku kū kai kau koe kou koi kei ka ",
+      "tekau taihi ruā tōru whā rima ona whitu waru iwa tekau",
+      "kei te runga i te wānaga o aotearoa ki te tamāki makaurau"
+    ]
+    sentences.forEach((s, i) => {
+      addButton("sentences" + i, 100, listStyle, s, () => mespeakmaori.speak(s))
+    })
   </script>
 </body>
 
